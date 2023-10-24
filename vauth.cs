@@ -270,7 +270,7 @@ namespace VelvetAuth
 
                 ServicePointManager.ServerCertificateValidationCallback = encryption.pin_public_key;
 
-                var raw_response = client.UploadValues("https://velvetauth.xyz/api/handler.php" + "?type=" + type, post_data);
+                var raw_response = client.UploadValues("https://velvetauth.xyz/auth/api/handler.php" + "?type=" + type, post_data);
 
                 ServicePointManager.ServerCertificateValidationCallback += (send, certificate, chain, sslPolicyErrors) => { return true; };
 
