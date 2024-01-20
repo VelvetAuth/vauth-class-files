@@ -254,9 +254,28 @@ namespace VelvetAuth
             return false;
         }
 
-      
 
-  
+
+ public void sendwebhook(string message)
+{
+    if (user_data.username == null) user_data.username = "NONE";
+
+    if (!is_initialized)
+    {
+        messagebox.show("The program wasn't initialized", messagebox.icons.error);
+
+        return;
+    }
+
+    var values_to_upload = new NameValueCollection
+    {
+        ["username"] = encryption.encrypt(user_data.username, api_key, session_iv),
+        ["message"] = encryption.encrypt(message, api_key, session_iv),
+        ["sessid"] = encryption.byte_arr_to_str(Encoding.Default.GetBytes(session_id))
+    };
+
+    do_request("send_webhook", values_to_upload);
+} 
 
   
 
